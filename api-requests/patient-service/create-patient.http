@@ -3,9 +3,9 @@ POST localhost:4000/patients
 Content-Type: application/json
 
 {
-  "name": "Someone Someone sending kafka",
-  "email": "sendanalytics@test.com",
+  "name": "Someone test analytics service",
+  "email": "sendaaaanalytics@test.com",
   "address": "123 main street22",
-  "dateOfBirth": "1995-09-10",
+  "dateOfBirth": "2005-04-15",
   "registeredDate": "2024-11-28"
 }
