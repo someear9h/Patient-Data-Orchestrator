@@ -1,10 +1,10 @@
 ### POST request to create a new patient
-POST localhost:4004/api/patients
+POST localhost:8080/patients
 Content-Type: application/json
 
 {
-  "name": "Someonme test analytics service",
-  "email": "yes@test.com",
+  "name": "Someone test analytics service",
+  "email": "kafkatest1@test.com",
   "address": "123 main street22",
   "dateOfBirth": "2005-04-15",
   "registeredDate": "2024-11-28"
