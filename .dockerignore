@@ -1,0 +1,8 @@
+**/.DS_Store
+**/target/
+**/.idea/
+**/.git/
+**/.file
+**/mvnw
+**/mvnw.cmd
+**/.mvn

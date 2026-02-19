@@ -1,10 +1,11 @@
 ### POST request to create a new patient
-POST localhost:8080/patients
+POST http://localhost:4004/api/patients
 Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0ZXN0dXNlckB0ZXN0LmNvbSIsInJvbGUiOiJBRE1JTiIsImlhdCI6MTc3MTUzMzM2NCwiZXhwIjoxNzcxNTY5MzY0fQ.3TYVlSkWDe6cZir4mwhSMqaKrXD3CSa4gOh5yoJkS0Q
 
 {
-  "name": "Someone test analytics service",
-  "email": "kafkatest1@test.com",
+  "name": "test on 20th feb",
+  "email": "20feb@test.com",
   "address": "123 main street22",
   "dateOfBirth": "2005-04-15",
   "registeredDate": "2024-11-28"

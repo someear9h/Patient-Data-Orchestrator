@@ -1,0 +1,150 @@
+version: '3.8'
+
+services:
+  patient-service-db:
+#    image: postgres:latest
+    image: postgres:16-alpine
+    container_name: patient-service-db
+    ports:
+      - "5001:5432"
+    environment:
+      POSTGRES_DB: db
+      POSTGRES_USER: admin_user
+      POSTGRES_PASSWORD: password
+    volumes:
+      # Maps your local project folder to the Postgres data directory
+      - ./patient-service-db:/var/lib/postgresql/data
+    networks:
+      - internal
+
+  kafka:
+    # Switching to the official Apache image for better reliability
+    image: apache/kafka:latest
+    container_name: kafka
+    ports:
+      - "9095:9092"
+      - "9094:9094"
+    environment:
+      # Official Apache Kafka environment variables (no CFG_ prefix)
+      - KAFKA_NODE_ID=1
+      - KAFKA_PROCESS_ROLES=broker,controller
+      - KAFKA_LISTENERS=PLAINTEXT://:9092,CONTROLLER://:9093,EXTERNAL://:9094
+      - KAFKA_ADVERTISED_LISTENERS=PLAINTEXT://kafka:9092,EXTERNAL://localhost:9094
+      - KAFKA_CONTROLLER_LISTENER_NAMES=CONTROLLER
+      - KAFKA_LISTENER_SECURITY_PROTOCOL_MAP=CONTROLLER:PLAINTEXT,PLAINTEXT:PLAINTEXT,EXTERNAL:PLAINTEXT
+      - KAFKA_CONTROLLER_QUORUM_VOTERS=1@kafka:9093
+      - KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR=1
+    networks:
+      - internal
+
+  auth-service-db:
+    image: postgres:16-alpine
+    container_name: auth-service-db
+    ports:
+      - "5003:5432"
+    environment:
+      POSTGRES_DB: db
+      POSTGRES_USER: admin_user
+      POSTGRES_PASSWORD: password
+    volumes:
+      - ./auth_db_data:/var/lib/postgresql/data
+    networks:
+      - internal
+
+  auth-service:
+    build:
+      context: ./auth-service
+      dockerfile: Dockerfile
+    container_name: auth-service
+    image: auth-service:latest
+    environment:
+      JWT_SECRET: "K9c7Yx2F1m0dZ+fH2A3p5Qm7M8T0bRkN1sU4vWJ9XzE="
+      SPRING_DATASOURCE_URL: jdbc:postgresql://auth-service-db:5432/db
+      SPRING_DATASOURCE_USERNAME: admin_user
+      SPRING_DATASOURCE_PASSWORD: password
+      SPRING_JPA_HIBERNATE_DDL_AUTO: update
+      SPRING_SQL_INIT_MODE: always
+    networks:
+      - internal
+    depends_on:
+      - auth-service-db
+
+  patient-service:
+    build:
+      context: ./patient-service
+      dockerfile: Dockerfile
+    container_name: patient-service
+    image: patient-service:latest
+    environment:
+      BILLING_SERVICE_ADDRESS: billing-service
+      BILLING_SERVICE_GRPC_PORT: 9090
+      SPRING_DATASOURCE_PASSWORD: password
+      SPRING_DATASOURCE_URL: jdbc:postgresql://patient-service-db:5432/db
+      SPRING_DATASOURCE_USERNAME: admin_user
+      SPRING_JPA_HIBERNATE_DDL_AUTO: update
+      SPRING_KAFKA_BOOTSTRAP_SERVERS: kafka:9092
+      SPRING_KAFKA_PRODUCER_KEY_SERIALIZER: org.apache.kafka.common.serialization.StringSerializer
+      SPRING_KAFKA_PRODUCER_VALUE_SERIALIZER: org.apache.kafka.common.serialization.ByteArraySerializer
+      SPRING_SQL_INIT_MODE: always
+    networks:
+      - internal
+    depends_on:
+      - patient-service-db
+      - kafka
+
+  analytics-service:
+    build:
+      context: ./analytics-service
+      dockerfile: Dockerfile.analytics
+    container_name: analytics-service
+    image: analytics-service:latest
+    ports:
+      - "4002:4002"
+    environment:
+      SPRING_DATASOURCE_PASSWORD: password
+      SPRING_DATASOURCE_URL: jdbc:postgresql://patient-service-db:5432/db
+      SPRING_DATASOURCE_USERNAME: admin_user
+      SPRING_JPA_HIBERNATE_DDL_AUTO: update
+      SPRING_KAFKA_BOOTSTRAP_SERVERS: kafka:9092
+      SPRING_KAFKA_CONSUMER_KEY_DESERIALIZER: org.apache.kafka.common.serialization.StringDeserializer
+      SPRING_KAFKA_CONSUMER_VALUE_DESERIALIZER: org.apache.kafka.common.serialization.ByteArrayDeserializer
+      SPRING_SQL_INIT_MODE: always
+    networks:
+      - internal
+    depends_on:
+      - patient-service-db
+      - kafka
+
+
+  apigateway-service:
+    build:
+      context: ./apigateway-service
+      dockerfile: Dockerfile
+    container_name: apigateway-service
+    image: apigateway-service:latest
+    ports:
+      - "4004:4004"
+    environment:
+      # Matches the environment variable from your screenshot
+      AUTH_SERVICE_URL: http://auth-service:8080
+    networks:
+      - internal
+    depends_on:
+      - auth-service
+      - patient-service
+
+  billing-service:
+    build:
+      context: ./billing-service
+      dockerfile: Dockerfile
+    container_name: billing-service
+    image: billing-service:latest
+    ports:
+      - "4001:4001"
+      - "9090:9090"
+    networks:
+      - internal
+
+networks:
+  internal:
+    driver: bridge
