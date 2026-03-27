@@ -1,0 +1,14 @@
+syntax = "proto3";
+
+package audit.events;
+option java_multiple_files = true;
+
+message AuditEvent {
+  string eventId = 1;
+  string timestamp = 2;       // ISO-8601 string or epoch milliseconds
+  string serviceName = 3;     // e.g., "patient-service"
+  string action = 4;          // e.g., "CREATE_PATIENT"
+  string performedBy = 5;     // email or ID of the user who did it
+  string resourceId = 6;      // The ID of the patient/bill
+  string details = 7;         // JSON string of changes or extra context
+}

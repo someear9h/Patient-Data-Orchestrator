@@ -35,3 +35,10 @@ spring:
             - Path=/api-docs/auth
           filters:
             - RewritePath=/api-docs/auth, /v3/api-docs
+        - id: audit-service-route
+          uri: http://audit-service:8085 # Using the port we set in the audit-service application.yml
+          predicates:
+            - Path=/api/audit/**
+          filters:
+            - StripPrefix=1
+            - JwtValidation # only authenticated users can view logs!
