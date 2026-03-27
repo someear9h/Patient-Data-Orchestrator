@@ -36,6 +36,7 @@ Every CRUD operation in the Patient Service fires an asynchronous byte-array pay
 
 ### 6. Audit Flowchart
 A logical breakdown of the compliance flow, showing the split between standard database saving and background Elasticsearch indexing.
+
 ![Full Audit Flow](assets/full_audit_service_flow.png)
 
 ---
