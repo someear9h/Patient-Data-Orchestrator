@@ -42,3 +42,10 @@ spring:
           filters:
             - StripPrefix=1
             - JwtValidation # only authenticated users can view logs!
+        - id: billing-service-route
+          uri: http://billing-service:4001
+          predicates:
+            - Path=/api/billing/**
+          filters:
+            - StripPrefix=1
+            - JwtValidation
