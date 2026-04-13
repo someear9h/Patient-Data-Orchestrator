@@ -1,4 +1,5 @@
 import org.junit.jupiter.api.Test;
+import webrequests.BaseIntegrationTest;
 
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.equalTo;
@@ -63,7 +64,7 @@ public class PatientSecurityAndValidationTest extends BaseIntegrationTest {
                 .body(payload)
                 .post("/api/patients");
 
-        // Second creation with SAME email (Expected: 409 Conflict)
+        // Second creation with SAME email
         given()
                 .header("Authorization", "Bearer " + token)
                 .contentType("application/json")

@@ -22,6 +22,16 @@
             <version>5.11.4</version>
             <scope>test</scope>
         </dependency>
+
+<!--        Testing Kafka is like waiting for a text message; it's not instant. -->
+<!--        We need a library called Awaitility to handle this "waiting" gracefully -->
+<!--        without using Thread.sleep() (which is a sin in testing).-->
+        <dependency>
+            <groupId>org.awaitility</groupId>
+            <artifactId>awaitility</artifactId>
+            <version>4.2.0</version>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
 
     <properties>

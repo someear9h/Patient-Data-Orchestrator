@@ -3,6 +3,7 @@ import static org.hamcrest.Matchers.notNullValue;
 
 import org.junit.jupiter.api.Test;
 import io.restassured.response.Response;
+import webrequests.BaseIntegrationTest;
 
 public class PatientIntegrationTest extends BaseIntegrationTest {
     @Test
