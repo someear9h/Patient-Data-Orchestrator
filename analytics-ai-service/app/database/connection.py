@@ -7,7 +7,7 @@ from app.core.config import settings
 engine = create_engine(
     settings.DATABASE_URL, 
     pool_pre_ping=True,
-    echo=True # to see the exact SQL generated in terminal
+    echo=False # make it true -> to see the exact SQL generated in terminal
 )
 
 def test_db_connection():
