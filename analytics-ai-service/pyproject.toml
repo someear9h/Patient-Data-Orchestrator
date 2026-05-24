@@ -1,0 +1,26 @@
+[project]
+name = "analytics-ai-service"
+version = "0.1.0"
+description = "Autonomous AI analytics engine for patient data"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    # API Framework
+    "fastapi>=0.110.0",
+    "uvicorn>=0.29.0",
+    
+    # AI & Orchestration
+    "langchain>=0.1.13",
+    "langchain-core>=0.1.33",
+    "langchain-groq>=0.1.0",
+    "langgraph>=0.0.30", # Critical for stateful agent orchestration
+    
+    # Database Integration
+    "sqlalchemy>=2.0.29", # ORM for safe query building
+    "psycopg2-binary>=2.9.9", # PostgreSQL adapter
+    
+    # Data Validation & Env
+    "pydantic>=2.6.4",
+    "python-dotenv>=1.0.1",
+    "pydantic_settings"
+]

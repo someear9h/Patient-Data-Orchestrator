@@ -1,0 +1,128 @@
+# =========================
+# Python cache files
+# =========================
+__pycache__/
+*.py[cod]
+*$py.class
+
+# =========================
+# Virtual environments
+# =========================
+venv/
+.env/
+.venv/
+env/
+
+# =========================
+# Environment variables
+# =========================
+.env
+.env.*
+*.env
+
+# =========================
+# Jupyter Notebook files
+# =========================
+.ipynb_checkpoints/
+
+# =========================
+# SQLite databases
+# =========================
+*.db
+*.sqlite3
+
+# =========================
+# Logs
+# =========================
+*.log
+
+# =========================
+# VSCode
+# =========================
+.vscode/
+
+# =========================
+# PyCharm / IntelliJ
+# =========================
+.idea/
+
+# =========================
+# macOS system files
+# =========================
+.DS_Store
+
+# =========================
+# Linux system files
+# =========================
+*~
+
+# =========================
+# Testing / coverage
+# =========================
+.pytest_cache/
+.coverage
+htmlcov/
+
+# =========================
+# Mypy / Ruff / type checkers
+# =========================
+.mypy_cache/
+.ruff_cache/
+
+# =========================
+# Build / distribution
+# =========================
+build/
+dist/
+site/
+*.egg-info/
+.eggs/
+
+# =========================
+# Python packaging
+# =========================
+pip-wheel-metadata/
+
+# =========================
+# UV package manager
+# =========================
+.uv/
+uv_cache/
+
+# =========================
+# Temporary files
+# =========================
+*.tmp
+*.swp
+*.swo
+
+# =========================
+# Notebook outputs
+# =========================
+*.nbconvert.ipynb
+
+# =========================
+# OS generated files
+# =========================
+Thumbs.db
+
+# =========================
+# Secrets / API keys
+# =========================
+secrets.toml
+config.local.py
+
+# =========================
+# Vector DB / embeddings
+# =========================
+chroma/
+chromadb/
+faiss_index/
+*.faiss
+
+# =========================
+# Model / AI cache files
+# =========================
+.cache/
+hf_cache/
+huggingface/
