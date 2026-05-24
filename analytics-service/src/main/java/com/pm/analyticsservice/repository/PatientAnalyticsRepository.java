@@ -7,5 +7,9 @@ import java.time.LocalDate;
 import java.util.Optional;
 
 public interface PatientAnalyticsRepository extends JpaRepository<PatientAnalytics, Long> {
-    Optional<PatientAnalytics> findByEventDateAndAgeGroup(LocalDate eventDate, String ageGroup);
+
+    // Spring Data JPA magic: Finds the exact row based on our 4 dimensions
+    Optional<PatientAnalytics> findByEventDateAndAgeGroupAndEventTypeAndEmailDomain(
+            LocalDate eventDate, String ageGroup, String eventType, String emailDomain
+    );
 }

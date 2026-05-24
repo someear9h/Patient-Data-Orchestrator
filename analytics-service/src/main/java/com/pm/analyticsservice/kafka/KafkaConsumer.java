@@ -29,7 +29,7 @@ public class KafkaConsumer {
                     patientEvent.getEmail());
 
             // call analytics
-            analyticsService.processPatientEvent(patientEvent.getDateOfBirth());
+            analyticsService.processPatientEvent(patientEvent);
         } catch (Exception e) {
             log.error("Error Deserializing Event {}", e.getMessage());
         }

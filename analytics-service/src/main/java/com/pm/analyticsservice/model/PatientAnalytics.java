@@ -6,7 +6,7 @@ import java.time.LocalDate;
 
 @Entity
 @Table(name = "patient_analytics", uniqueConstraints = {
-        @UniqueConstraint(columnNames = {"event_date", "age_group"})
+        @UniqueConstraint(columnNames = {"event_date", "age_group", "event_type", "email_domain"})
 })
 public class PatientAnalytics {
     @Id
@@ -19,34 +19,30 @@ public class PatientAnalytics {
     @Column(name = "age_group", nullable = false)
     private String ageGroup;
 
-    @Column(name = "signup_count", nullable = false)
-    private int signupCount = 0;
+    @Column(name = "event_type", nullable = false)
+    private String eventType;
 
-    private Long getId() {
-        return id;
-    }
+    @Column(name = "email_domain", nullable = false)
+    private String emailDomain;
 
-    public LocalDate getEventDate() {
-        return eventDate;
-    }
+    @Column(name = "event_count", nullable = false)
+    private int eventCount = 0; // Renamed from signupCount
 
-    public void setEventDate(LocalDate eventDate) {
-        this.eventDate = eventDate;
-    }
+    // --- Getters and Setters ---
+    public Long getId() { return id; }
 
-    public String getAgeGroup() {
-        return ageGroup;
-    }
+    public LocalDate getEventDate() { return eventDate; }
+    public void setEventDate(LocalDate eventDate) { this.eventDate = eventDate; }
 
-    public void setAgeGroup(String ageGroup) {
-        this.ageGroup = ageGroup;
-    }
+    public String getAgeGroup() { return ageGroup; }
+    public void setAgeGroup(String ageGroup) { this.ageGroup = ageGroup; }
 
-    public int getSignupCount() {
-        return signupCount;
-    }
+    public String getEventType() { return eventType; }
+    public void setEventType(String eventType) { this.eventType = eventType; }
 
-    public void setSignupCount(int signupCount) {
-        this.signupCount = signupCount;
-    }
+    public String getEmailDomain() { return emailDomain; }
+    public void setEmailDomain(String emailDomain) { this.emailDomain = emailDomain; }
+
+    public int getEventCount() { return eventCount; }
+    public void setEventCount(int eventCount) { this.eventCount = eventCount; }
 }
