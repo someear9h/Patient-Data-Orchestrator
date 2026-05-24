@@ -220,9 +220,41 @@ Grey-box testing was chosen deliberately: tests send external HTTP requests like
 
 The entire architecture is containerized. You do not need to install Kafka, Postgres, or Elasticsearch on your local machine.
 
-**1. Clone the repository**
+**Clone the repository**
 
 ```bash
 git clone https://github.com/yourusername/Patient-Data-Orchestrator.git
 cd Patient-Data-Orchestrator
+```
+
+### Step 1: Boot the Java & Core Data Infrastructure
+
+Run this from the root `Patient-Data-Orchestrator` folder to spin up the core platform in the background:
+
+```bash
+docker-compose up -d
+
+```
+
+(Give this about 30 to 45 seconds to let Elasticsearch and Kafka finish their internal health checks so your services can connect cleanly ).
+
+### Step 2: Launch the AI Analytics Microservice
+
+Open a second terminal window, navigate into your `analytics-ai-service` directory, and start the LangGraph backend:
+
+```bash
+cd analytics-ai-service
+python -m app.main
+
+```
+
+*(This opens up the REST gateway on `http://127.0.0.1:8000` so it can communicate with the data layers).*
+
+### Step 3: Launch the UI Dashboard
+
+Open a third terminal window, stay in the `analytics-ai-service` directory, and boot your frontend presentation layer:
+
+```bash
+uv run streamlit run ui/app.py
+
 ```
