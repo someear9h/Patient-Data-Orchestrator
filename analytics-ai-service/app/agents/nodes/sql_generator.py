@@ -11,7 +11,7 @@ from app.core.config import settings
 llm = ChatGroq(
     temperature=0,
     groq_api_key=settings.GROQ_API_KEY,
-    model_name="qwen/qwen3-32b"
+    model_name="openai/gpt-oss-20b"
 )
 
 sql_prompt = ChatPromptTemplate.from_messages([

@@ -1,5 +1,6 @@
 from sqlalchemy import text
 from sqlalchemy.exc import SQLAlchemyError
+import decimal
 from app.agents.graph import AgentState
 from app.database.connection import engine
 
@@ -20,6 +21,11 @@ def execute_sql_node(state: AgentState) -> AgentState:
             result = connection.execute(text(query))
             
             rows = [dict(row._mapping) for row in result]
+
+            for row in rows:
+                for key, value in row.items():
+                    if isinstance(value, decimal.Decimal):
+                        row[key] = float(value)
             
             print(f"INFO: Successfully fetched {len(rows)} rows.")
             
