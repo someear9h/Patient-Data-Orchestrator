@@ -25,4 +25,8 @@ dependencies = [
     "pandas",
     "plotly",
     "streamlit",
+    "langchain_huggingface",
+    "langchain_chroma",
+    "protobuf<=3.20.3",
+    "sentence-transformers>=5.5.1",
 ]

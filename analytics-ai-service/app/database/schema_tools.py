@@ -25,12 +25,11 @@ def get_database_schema() -> str:
         
     return schema_text
 
-# --- Quick Test Block ---
+# for quick test 
 if __name__ == "__main__":
-    # 1. Test the connection
     print("Testing connection...")
     if test_db_connection():
-        # 2. Dump the schema
+
         print("\nExtracting Schema for the LLM...")
         schema = get_database_schema()
         print("-" * 40)
