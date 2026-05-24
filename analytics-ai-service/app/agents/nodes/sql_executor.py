@@ -13,7 +13,7 @@ def execute_sql_node(state: AgentState) -> AgentState:
     if not query:
         return {"error": "No SQL query found in state to execute."}
         
-    print(f"⚡ Executing Query against database...")
+    print(f"Executing Query against database...")
     
     try:
         with engine.connect() as connection:
