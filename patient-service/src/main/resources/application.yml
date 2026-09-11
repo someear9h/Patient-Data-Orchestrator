@@ -1,0 +1,2 @@
+billing:
+  transport: grpc # switch to "rest" for the REST run
