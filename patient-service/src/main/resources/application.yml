@@ -8,6 +8,9 @@ spring:
 billing:
   transport: grpc # switch to "rest" for the REST run
 
+audit:
+  mode: async
+
 logging:
   level:
     root: WARN

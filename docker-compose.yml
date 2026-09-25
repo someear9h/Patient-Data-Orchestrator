@@ -124,6 +124,7 @@ services:
     image: patient-service:latest
     environment:
       BILLING_TRANSPORT: ${BILLING_TRANSPORT:-grpc}
+      AUDIT_MODE: ${AUDIT_MODE:-async}
       BILLING_SERVICE_ADDRESS: billing-service
       BILLING_SERVICE_GRPC_PORT: 9090
       SPRING_DATASOURCE_PASSWORD: password
@@ -149,6 +150,7 @@ services:
     ports:
       - "4002:4002"
     environment:
+      SERVER_PORT: 4002
       SPRING_DATASOURCE_URL: jdbc:postgresql://analytics-service-db:5432/analyticsdb
       SPRING_DATASOURCE_USERNAME: analytics_user
       SPRING_DATASOURCE_PASSWORD: password

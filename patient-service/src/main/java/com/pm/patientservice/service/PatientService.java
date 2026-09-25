@@ -28,19 +28,25 @@ public class PatientService {
     private final BillingServiceGrpcClient billingServiceGrpcClient;
     private final KafkaProducer kafkaProducer;
     private final BillingRestClient restClient;
+    private final AnalyticsRestClient analyticsRestClient;
 
     private final String transport;
+    private final String auditMode;
 
     PatientService(PatientRepository patientRepository,
                    BillingServiceGrpcClient billingServiceGrpcClient,
                    KafkaProducer kafkaProducer,
                    BillingRestClient restClient,
-                   @Value("${billing.transport:grpc}") String transport) {
+                   @Value("${billing.transport:grpc}") String transport,
+                   @Value("${audit.mode:async}") String auditMode,
+                   AnalyticsRestClient analyticsRestClient) {
         this.patientRepository = patientRepository;
         this.billingServiceGrpcClient = billingServiceGrpcClient;
         this.kafkaProducer = kafkaProducer;
         this.restClient = restClient;
         this.transport = transport;
+        this.analyticsRestClient = analyticsRestClient;
+        this.auditMode = auditMode;
     }
 
     public List<PatientResponseDTO> getPatients() {
@@ -92,7 +98,18 @@ public class PatientService {
             }
         }
 
-        kafkaProducer.sendEvent(newPatient);
+        if ("sync".equals(auditMode)) {
+            // Synchronous: call analytics REST and wait for response
+            analyticsRestClient.sendPatientCreated(newPatient);
+        } else {
+            // Async (default): publish to Kafka, return immediately
+            kafkaProducer.sendEvent(newPatient);
+            kafkaProducer.sendAuditEvent(
+                    "CREATE_PATIENT",
+                    extractEmailFromJwt(),
+                    newPatient.getId().toString(),
+                    "Created new patient record for email: " + newPatient.getEmail());
+        }
 
         // Fetch the email dynamically, or fallback to "system_user" if it fails
         String performedByEmail = extractEmailFromJwt();
