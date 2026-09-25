@@ -11,6 +11,7 @@ import lombok.RequiredArgsConstructor;
 import net.devh.boot.grpc.server.service.GrpcService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.dao.DataIntegrityViolationException;
 
 import java.util.UUID;
 
@@ -28,15 +29,7 @@ public class BillingGrpcService extends BillingServiceGrpc.BillingServiceImplBas
         UUID patientUuid = UUID.fromString(billingrequest.getPatientId());
 
         // 2. Build the Entity
-        BillingAccount account = BillingAccount.builder()
-                .patientId(patientUuid)
-                .accountId("BILL-" + UUID.randomUUID().toString().substring(0, 8))
-                .status("ACTIVE")
-                .balance(0)
-                .build();
-
-        // 3. Save to Database
-        BillingAccount savedAccount = billingRepository.save(account);
+        BillingAccount savedAccount = getOrCreate(patientUuid);
 
         log.info("Billing account created in DB for patient: {}", patientUuid);
 
@@ -48,5 +41,26 @@ public class BillingGrpcService extends BillingServiceGrpc.BillingServiceImplBas
 
         responseObserver.onNext(response);
         responseObserver.onCompleted();
+    }
+
+    private BillingAccount getOrCreate(UUID patientUuid) {
+        return billingRepository.findByPatientId(patientUuid).orElseGet(() -> {
+            try {
+                BillingAccount saved = billingRepository.save(
+                        BillingAccount.builder()
+                                .patientId(patientUuid)
+                                .accountId("BILL-" + UUID.randomUUID().toString().substring(0, 8))
+                                .status("ACTIVE")
+                                .balance(0)
+                                .build());
+                log.info("Billing account created for patient {}", patientUuid);
+                return saved;
+            } catch (DataIntegrityViolationException e) {
+                // Race: another thread/transport inserted between our find and save.
+                log.warn("Concurrent insert for patient {}, re-reading", patientUuid);
+                return billingRepository.findByPatientId(patientUuid)
+                        .orElseThrow(() -> e);
+            }
+        });
     }
 }

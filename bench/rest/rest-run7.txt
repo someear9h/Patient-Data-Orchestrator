@@ -1,0 +1,226 @@
+
+         /\      Grafana   /‾‾/  
+    /\  /  \     |\  __   /  /   
+   /  \/    \    | |/ /  /   ‾‾\ 
+  /          \   |   (  |  (‾)  |
+ / __________ \  |_|\_\  \_____/ 
+
+
+     execution: local
+        script: bench/patient-create.js
+        output: -
+
+     scenarios: (100.00%) 1 scenario, 10 max VUs, 1m30s max duration (incl. graceful stop):
+              * patients: 10 looping VUs for 1m0s (gracefulStop: 30s)
+
+
+running (0m01.0s), 10/10 VUs, 185 complete and 0 interrupted iterations
+patients   [   2% ] 10 VUs  0m01.0s/1m0s
+
+running (0m02.0s), 10/10 VUs, 273 complete and 0 interrupted iterations
+patients   [   3% ] 10 VUs  0m02.0s/1m0s
+
+running (0m03.0s), 10/10 VUs, 504 complete and 0 interrupted iterations
+patients   [   5% ] 10 VUs  0m03.0s/1m0s
+
+running (0m04.0s), 10/10 VUs, 884 complete and 0 interrupted iterations
+patients   [   7% ] 10 VUs  0m04.0s/1m0s
+
+running (0m05.0s), 10/10 VUs, 1291 complete and 0 interrupted iterations
+patients   [   8% ] 10 VUs  0m05.0s/1m0s
+
+running (0m06.0s), 10/10 VUs, 1697 complete and 0 interrupted iterations
+patients   [  10% ] 10 VUs  0m06.0s/1m0s
+
+running (0m07.0s), 10/10 VUs, 1897 complete and 0 interrupted iterations
+patients   [  12% ] 10 VUs  0m07.0s/1m0s
+
+running (0m08.0s), 10/10 VUs, 2039 complete and 0 interrupted iterations
+patients   [  13% ] 10 VUs  0m08.0s/1m0s
+
+running (0m09.0s), 10/10 VUs, 2313 complete and 0 interrupted iterations
+patients   [  15% ] 10 VUs  0m09.0s/1m0s
+
+running (0m10.0s), 10/10 VUs, 2624 complete and 0 interrupted iterations
+patients   [  17% ] 10 VUs  0m10.0s/1m0s
+
+running (0m11.0s), 10/10 VUs, 3014 complete and 0 interrupted iterations
+patients   [  18% ] 10 VUs  0m11.0s/1m0s
+
+running (0m12.0s), 10/10 VUs, 3404 complete and 0 interrupted iterations
+patients   [  20% ] 10 VUs  0m12.0s/1m0s
+
+running (0m13.0s), 10/10 VUs, 3723 complete and 0 interrupted iterations
+patients   [  22% ] 10 VUs  0m13.0s/1m0s
+
+running (0m14.0s), 10/10 VUs, 4128 complete and 0 interrupted iterations
+patients   [  23% ] 10 VUs  0m14.0s/1m0s
+
+running (0m15.0s), 10/10 VUs, 4558 complete and 0 interrupted iterations
+patients   [  25% ] 10 VUs  0m15.0s/1m0s
+
+running (0m16.0s), 10/10 VUs, 5038 complete and 0 interrupted iterations
+patients   [  27% ] 10 VUs  0m16.0s/1m0s
+
+running (0m17.0s), 10/10 VUs, 5310 complete and 0 interrupted iterations
+patients   [  28% ] 10 VUs  0m17.0s/1m0s
+
+running (0m18.0s), 10/10 VUs, 5752 complete and 0 interrupted iterations
+patients   [  30% ] 10 VUs  0m18.0s/1m0s
+
+running (0m19.0s), 10/10 VUs, 6245 complete and 0 interrupted iterations
+patients   [  32% ] 10 VUs  0m19.0s/1m0s
+
+running (0m20.0s), 10/10 VUs, 6658 complete and 0 interrupted iterations
+patients   [  33% ] 10 VUs  0m20.0s/1m0s
+
+running (0m21.0s), 10/10 VUs, 7130 complete and 0 interrupted iterations
+patients   [  35% ] 10 VUs  0m21.0s/1m0s
+
+running (0m22.0s), 10/10 VUs, 7571 complete and 0 interrupted iterations
+patients   [  37% ] 10 VUs  0m22.0s/1m0s
+
+running (0m23.0s), 10/10 VUs, 8128 complete and 0 interrupted iterations
+patients   [  38% ] 10 VUs  0m23.0s/1m0s
+
+running (0m24.0s), 10/10 VUs, 8696 complete and 0 interrupted iterations
+patients   [  40% ] 10 VUs  0m24.0s/1m0s
+
+running (0m25.0s), 10/10 VUs, 9317 complete and 0 interrupted iterations
+patients   [  42% ] 10 VUs  0m25.0s/1m0s
+
+running (0m26.0s), 10/10 VUs, 9923 complete and 0 interrupted iterations
+patients   [  43% ] 10 VUs  0m26.0s/1m0s
+
+running (0m27.0s), 10/10 VUs, 10513 complete and 0 interrupted iterations
+patients   [  45% ] 10 VUs  0m27.0s/1m0s
+
+running (0m28.0s), 10/10 VUs, 11179 complete and 0 interrupted iterations
+patients   [  47% ] 10 VUs  0m28.0s/1m0s
+
+running (0m29.0s), 10/10 VUs, 11672 complete and 0 interrupted iterations
+patients   [  48% ] 10 VUs  0m29.0s/1m0s
+
+running (0m30.0s), 10/10 VUs, 12242 complete and 0 interrupted iterations
+patients   [  50% ] 10 VUs  0m30.0s/1m0s
+
+running (0m31.0s), 10/10 VUs, 12677 complete and 0 interrupted iterations
+patients   [  52% ] 10 VUs  0m31.0s/1m0s
+
+running (0m32.0s), 10/10 VUs, 13110 complete and 0 interrupted iterations
+patients   [  53% ] 10 VUs  0m32.0s/1m0s
+
+running (0m33.0s), 10/10 VUs, 13619 complete and 0 interrupted iterations
+patients   [  55% ] 10 VUs  0m33.0s/1m0s
+
+running (0m34.0s), 10/10 VUs, 14161 complete and 0 interrupted iterations
+patients   [  57% ] 10 VUs  0m34.0s/1m0s
+
+running (0m35.0s), 10/10 VUs, 14738 complete and 0 interrupted iterations
+patients   [  58% ] 10 VUs  0m35.0s/1m0s
+
+running (0m36.0s), 10/10 VUs, 15328 complete and 0 interrupted iterations
+patients   [  60% ] 10 VUs  0m36.0s/1m0s
+
+running (0m37.0s), 10/10 VUs, 15809 complete and 0 interrupted iterations
+patients   [  62% ] 10 VUs  0m37.0s/1m0s
+
+running (0m38.0s), 10/10 VUs, 16309 complete and 0 interrupted iterations
+patients   [  63% ] 10 VUs  0m38.0s/1m0s
+
+running (0m39.0s), 10/10 VUs, 16864 complete and 0 interrupted iterations
+patients   [  65% ] 10 VUs  0m39.0s/1m0s
+
+running (0m40.0s), 10/10 VUs, 17464 complete and 0 interrupted iterations
+patients   [  67% ] 10 VUs  0m40.0s/1m0s
+
+running (0m41.0s), 10/10 VUs, 17926 complete and 0 interrupted iterations
+patients   [  68% ] 10 VUs  0m41.0s/1m0s
+
+running (0m42.0s), 10/10 VUs, 18457 complete and 0 interrupted iterations
+patients   [  70% ] 10 VUs  0m42.0s/1m0s
+
+running (0m43.0s), 10/10 VUs, 19035 complete and 0 interrupted iterations
+patients   [  72% ] 10 VUs  0m43.0s/1m0s
+
+running (0m44.0s), 10/10 VUs, 19539 complete and 0 interrupted iterations
+patients   [  73% ] 10 VUs  0m44.0s/1m0s
+
+running (0m45.0s), 10/10 VUs, 20051 complete and 0 interrupted iterations
+patients   [  75% ] 10 VUs  0m45.0s/1m0s
+
+running (0m46.0s), 10/10 VUs, 20603 complete and 0 interrupted iterations
+patients   [  77% ] 10 VUs  0m46.0s/1m0s
+
+running (0m47.0s), 10/10 VUs, 20874 complete and 0 interrupted iterations
+patients   [  78% ] 10 VUs  0m47.0s/1m0s
+
+running (0m48.0s), 10/10 VUs, 21341 complete and 0 interrupted iterations
+patients   [  80% ] 10 VUs  0m48.0s/1m0s
+
+running (0m49.0s), 10/10 VUs, 21893 complete and 0 interrupted iterations
+patients   [  82% ] 10 VUs  0m49.0s/1m0s
+
+running (0m50.0s), 10/10 VUs, 22397 complete and 0 interrupted iterations
+patients   [  83% ] 10 VUs  0m50.0s/1m0s
+
+running (0m51.0s), 10/10 VUs, 22834 complete and 0 interrupted iterations
+patients   [  85% ] 10 VUs  0m51.0s/1m0s
+
+running (0m52.0s), 10/10 VUs, 23290 complete and 0 interrupted iterations
+patients   [  87% ] 10 VUs  0m52.0s/1m0s
+
+running (0m53.0s), 10/10 VUs, 23781 complete and 0 interrupted iterations
+patients   [  88% ] 10 VUs  0m53.0s/1m0s
+
+running (0m54.0s), 10/10 VUs, 24342 complete and 0 interrupted iterations
+patients   [  90% ] 10 VUs  0m54.0s/1m0s
+
+running (0m55.0s), 10/10 VUs, 24597 complete and 0 interrupted iterations
+patients   [  92% ] 10 VUs  0m55.0s/1m0s
+
+running (0m56.0s), 10/10 VUs, 25041 complete and 0 interrupted iterations
+patients   [  93% ] 10 VUs  0m56.0s/1m0s
+
+running (0m57.0s), 10/10 VUs, 25745 complete and 0 interrupted iterations
+patients   [  95% ] 10 VUs  0m57.0s/1m0s
+
+running (0m58.0s), 10/10 VUs, 26477 complete and 0 interrupted iterations
+patients   [  97% ] 10 VUs  0m58.0s/1m0s
+
+running (0m59.0s), 10/10 VUs, 27144 complete and 0 interrupted iterations
+patients   [  98% ] 10 VUs  0m59.0s/1m0s
+
+running (1m00.0s), 10/10 VUs, 27856 complete and 0 interrupted iterations
+patients   [ 100% ] 10 VUs  1m00.0s/1m0s
+
+
+  █ TOTAL RESULTS 
+
+    checks_total.......: 27872   464.382633/s
+    checks_succeeded...: 100.00% 27872 out of 27872
+    checks_failed......: 0.00%   0 out of 27872
+
+    ✓ created
+
+    HTTP
+    http_req_duration..............: avg=21.31ms med=17.89ms p(90)=31.76ms p(95)=40.43ms p(99)=81.03ms max=280.28ms
+      { expected_response:true }...: avg=21.31ms med=17.89ms p(90)=31.76ms p(95)=40.43ms p(99)=81.03ms max=280.28ms
+    http_req_failed................: 0.00%  0 out of 27872
+    http_reqs......................: 27872  464.382633/s
+
+    EXECUTION
+    iteration_duration.............: avg=21.51ms med=18.07ms p(90)=31.95ms p(95)=40.61ms p(99)=81.45ms max=280.54ms
+    iterations.....................: 27872  464.382633/s
+    vus............................: 10     min=10         max=10
+    vus_max........................: 10     min=10         max=10
+
+    NETWORK
+    data_received..................: 9.0 MB 150 kB/s
+    data_sent......................: 14 MB  236 kB/s
+
+
+
+
+running (1m00.0s), 00/10 VUs, 27872 complete and 0 interrupted iterations
+patients ✓ [ 100% ] 10 VUs  1m0s

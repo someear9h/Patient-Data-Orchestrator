@@ -1,6 +1,11 @@
 server:
   port: 4001 # Billing service internal port
 
+logging:
+  level:
+    root: WARN
+    com.pm: WARN
+
 spring:
   application:
     name: billing-service
@@ -9,10 +14,14 @@ spring:
     url: jdbc:postgresql://billing-service-db:5432/billingdb
     username: user
     password: password
+    hikari:
+      maximum-pool-size: 20
+      minimum-idle: 5
+      connection-timeout: 5000
   jpa:
     hibernate:
       ddl-auto: update
-    show-sql: true
+    show-sql: false
     properties:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQLDialect

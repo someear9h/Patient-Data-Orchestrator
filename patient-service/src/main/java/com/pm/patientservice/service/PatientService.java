@@ -9,6 +9,7 @@ import com.pm.patientservice.kafka.KafkaProducer;
 import com.pm.patientservice.mapper.PatientMapper;
 import com.pm.patientservice.model.Patient;
 import com.pm.patientservice.repository.PatientRepository;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
@@ -26,12 +27,20 @@ public class PatientService {
     private final PatientRepository patientRepository;
     private final BillingServiceGrpcClient billingServiceGrpcClient;
     private final KafkaProducer kafkaProducer;
+    private final BillingRestClient restClient;
 
-    PatientService(PatientRepository patientRepository, BillingServiceGrpcClient billingServiceGrpcClient,
-                   KafkaProducer kafkaProducer) {
+    private final String transport;
+
+    PatientService(PatientRepository patientRepository,
+                   BillingServiceGrpcClient billingServiceGrpcClient,
+                   KafkaProducer kafkaProducer,
+                   BillingRestClient restClient,
+                   @Value("${billing.transport:grpc}") String transport) {
         this.patientRepository = patientRepository;
         this.billingServiceGrpcClient = billingServiceGrpcClient;
         this.kafkaProducer = kafkaProducer;
+        this.restClient = restClient;
+        this.transport = transport;
     }
 
     public List<PatientResponseDTO> getPatients() {
@@ -61,12 +70,26 @@ public class PatientService {
         Patient newPatient = patientRepository
                 .save(PatientMapper.toModel(patientRequestDTO));
 
-        try {
-            billingServiceGrpcClient.createBillingAccount(newPatient.getId().toString(),
-                    newPatient.getName(), newPatient.getEmail());
-        } catch (Exception e) {
-            // In production, i maybe might want to log this properly instead of printStackTrace
-            e.printStackTrace();
+        System.out.printf("\n\n\n\nSAMA: The patient Id= %s, name = %s, email = %s\n",
+                newPatient.getId().toString(), newPatient.getName(), newPatient.getEmail());
+
+        if("rest".equals(transport)) {
+            BillingRestClient.BillingRequestObject restRequest =
+                    new BillingRestClient.BillingRequestObject(
+                            newPatient.getId().toString(),
+                            newPatient.getName(),
+                            newPatient.getEmail());
+
+            restClient.sendPatientCreated(restRequest);
+        }
+        else {
+            try {
+                billingServiceGrpcClient.createBillingAccount(newPatient.getId().toString(),
+                        newPatient.getName(), newPatient.getEmail());
+            } catch (Exception e) {
+                // In production, i might want to log this properly instead of printStackTrace
+                e.printStackTrace();
+            }
         }
 
         kafkaProducer.sendEvent(newPatient);
