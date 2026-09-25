@@ -123,6 +123,7 @@ services:
     container_name: patient-service
     image: patient-service:latest
     environment:
+      BILLING_TRANSPORT: ${BILLING_TRANSPORT:-grpc}
       BILLING_SERVICE_ADDRESS: billing-service
       BILLING_SERVICE_GRPC_PORT: 9090
       SPRING_DATASOURCE_PASSWORD: password

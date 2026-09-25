@@ -15,7 +15,7 @@ public class BillingRestClient {
 
     // the name of the fields must be same as BillingRequestDTO
     // or else JSON keys wont line up and we will get null for name and email
-    record BillingRequestObject(String patientId, String name, String email) {}
+    public record BillingRequestObject(String patientId, String name, String email) {}
 
     public void sendPatientCreated(BillingRequestObject request) {
 
